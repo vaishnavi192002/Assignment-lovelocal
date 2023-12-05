@@ -1,0 +1,41 @@
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    while root:
+        if root.val > p.val and root.val > q.val:
+            root = root.left
+        elif root.val < p.val and root.val < q.val:
+            root = root.right
+        else:
+            return root
+def buildTree(input_str):
+    values = input_str.split(',')
+    root_val = values.pop(0).strip()
+    root = None if root_val.lower() == 'null' else TreeNode(int(root_val))
+    if root:
+        queue = [root]
+        for val in values:
+            val = val.strip()
+            if val.lower() != 'null':
+                current = queue.pop(0)
+                current.left = TreeNode(int(val))
+                queue.append(current.left)
+
+            val = values.pop(0).strip()
+            if val.lower() != 'null':
+                current.right = TreeNode(int(val))
+                queue.append(current.right)
+    return root
+if __name__ == "__main__":
+    input_str = input("root: ")
+    root = buildTree(input_str)
+    p_val = int(input("Enter the value for node p: "))
+    q_val = int(input("Enter the value for node q: "))
+    p = TreeNode(p_val)
+    q = TreeNode(q_val)
+    result = lowestCommonAncestor(root, p, q)
+    print(f"Lowest Common Ancestor of {p.val} and {q.val} is {result.val}")

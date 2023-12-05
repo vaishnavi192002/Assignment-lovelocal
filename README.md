@@ -1,2 +1,2 @@
-Sahyadri college of Engineering and management
+College : Sahyadri college of Engineering and management
 vaishshivakumar@gmail.com
